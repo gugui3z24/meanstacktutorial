@@ -64,8 +64,8 @@ module.exports = function(router) {
                         from: 'MEAN Stack Staff, staff@localhost.com',
                         to: user.email,
                         subject: 'Your Activation Link',
-                        text: 'Hello ' + user.name + ', thank you for registering at localhost.com. Please click on the following link to complete your activation: hhttps://evening-beach-50078.herokuapp.com/activate/' + user.temporarytoken,
-                        html: 'Hello<strong> ' + user.name + '</strong>,<br><br>Thank you for registering at localhost.com. Please click on the link below to complete your activation:<br><br><a href="https://evening-beach-50078.herokuapp.com/activate/' + user.temporarytoken + '">https://evening-beach-50078.herokuapp.com/activate/</a>'
+                        text: 'Hello ' + user.name + ', thank you for registering at localhost.com. Please click on the following link to complete your activation: https://immense-dusk-71112.herokuapp.com/activate/' + user.temporarytoken,
+                        html: 'Hello<strong> ' + user.name + '</strong>,<br><br>Thank you for registering at localhost.com. Please click on the link below to complete your activation:<br><br><a href="https://immense-dusk-71112.herokuapp.com/activate/' + user.temporarytoken + '">https://immense-dusk-71112.herokuapp.com/activate/</a>'
                     };
                     // Function to send e-mail to the user
                     client.sendMail(email, function(err, info) {
@@ -217,8 +217,8 @@ module.exports = function(router) {
                         from: 'MEAN Stack Staff, staff@localhost.com',
                         to: user.email,
                         subject: 'Activation Link Request',
-                        text: 'Hello ' + user.name + ', You recently requested a new account activation link. Please click on the following link to complete your activation: https://evening-beach-50078.herokuapp.com/activate/' + user.temporarytoken,
-                        html: 'Hello<strong> ' + user.name + '</strong>,<br><br>You recently requested a new account activation link. Please click on the link below to complete your activation:<br><br><a href="https://evening-beach-50078.herokuapp.com/activate/' + user.temporarytoken + '">https://evening-beach-50078.herokuapp.com/activate/</a>'
+                        text: 'Hello ' + user.name + ', You recently requested a new account activation link. Please click on the following link to complete your activation: https://immense-dusk-71112.herokuapp.com/activate/' + user.temporarytoken,
+                        html: 'Hello<strong> ' + user.name + '</strong>,<br><br>You recently requested a new account activation link. Please click on the link below to complete your activation:<br><br><a href="https://immense-dusk-71112.herokuapp.com/activate/' + user.temporarytoken + '">https://immense-dusk-71112.herokuapp.com/activate/</a>'
                     };
 
                     // Function to send e-mail to user
@@ -279,8 +279,8 @@ module.exports = function(router) {
                             from: 'MEAN Stack Staff, staff@localhost.com',
                             to: user.email,
                             subject: 'Reset Password Request',
-                            text: 'Hello ' + user.name + ', You recently request a password reset link. Please click on the link below to reset your password:<br><br><a href="https://evening-beach-50078.herokuapp.com/reset/' + user.resettoken,
-                            html: 'Hello<strong> ' + user.name + '</strong>,<br><br>You recently request a password reset link. Please click on the link below to reset your password:<br><br><a href="https://evening-beach-50078.herokuapp.com/reset/' + user.resettoken + '">https://evening-beach-50078.herokuapp.com/reset/</a>'
+                            text: 'Hello ' + user.name + ', You recently request a password reset link. Please click on the link below to reset your password:<br><br><a href="https://immense-dusk-71112.herokuapp.com/reset/' + user.resettoken,
+                            html: 'Hello<strong> ' + user.name + '</strong>,<br><br>You recently request a password reset link. Please click on the link below to reset your password:<br><br><a href="https://immense-dusk-71112.herokuapp.com/reset/' + user.resettoken + '">https://immense-dusk-71112.herokuapp.com/reset/</a>'
                         };
                         // Function to send e-mail to the user
                         client.sendMail(email, function(err, info) {
