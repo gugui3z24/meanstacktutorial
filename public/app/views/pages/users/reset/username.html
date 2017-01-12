@@ -1,0 +1,37 @@
+<!-- Header -->
+<div class="page-header">
+    <h1>Forgot Username</h1>
+</div>
+<!-- Header -->
+
+<!-- Start Form -->
+<form name="userForm" ng-submit="username.sendUsername(userData, userForm.$valid);" novalidate>
+    <!-- E-mail Input -->
+    <label>E-mail:</label>
+    <input ng-disabled="username.disabled || facebook.disabled || twitter.disabled || google.disabled" class="form-control" type="text" name="email" placeholder="please enter username" ng-model="username.userData.email" required>
+    <br>
+    <!-- Submit Button -->
+    <button ng-disabled="username.disabled || facebook.disabled || twitter.disabled || google.disabled" class="btn btn-primary" type="submit">Submit</button>&nbsp
+</form>
+<!-- End Form -->
+
+<br>
+
+<!-- Loading Icon (Bootstrap) -->
+<div class="jumbotron text-center" ng-show="username.loading">
+    <span class="glyphicon glyphicon-repeat spinner"></span>
+    <p>Loading....</p>
+</div>
+<!-- Loading Icon (Bootstrap) -->
+
+<br>
+
+<!-- Custom Success Message -->
+<div class="row show-hide-message" ng-show="username.successMsg">
+    <div class="alert alert-success">{{ username.successMsg }}</div>
+</div>
+
+<!-- Custom Error Message -->
+<div class="row show-hide-message" ng-show="username.errorMsg">
+    <div class="alert alert-danger">{{ username.errorMsg }}</div>
+</div>

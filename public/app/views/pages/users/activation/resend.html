@@ -1,0 +1,45 @@
+<!-- Header -->
+<div class="page-header">
+    <h1>Resend Activation Link</h1>
+</div>
+<!-- Header -->
+
+<!-- Start Resend Form -->
+<form ng-submit="resend.checkCredentials(loginData);">
+    <!-- Username Input -->
+    <label>Username:</label>
+    <input ng-disabled="resend.disabled" class="form-control" type="text" name="username" placeholder="please enter username" ng-model="resend.loginData.username">
+    <br>
+    <!-- Password Input -->
+    <label>Password:</label>
+    <input ng-disabled="resend.disabled" class="form-control" type="password" name="password" placeholder="please enter password" ng-model="resend.loginData.password">
+    <br>
+    <!-- Submit Button-->
+    <button ng-disabled="resend.disabled" class="btn btn-primary" type="submit">Submit</button>
+</form>
+<!-- End Resend Form -->
+
+<br>
+
+<!-- Loading Icon -->
+<div class="jumbotron text-center" ng-show="resend.loading">
+    <span class="glyphicon glyphicon-repeat spinner"></span>
+    <p>Loading....</p>
+</div>
+<!-- Loading Icon -->
+
+<br>
+
+<!-- Custom Success Message -->
+<div class="row show-hide-message" ng-show="resend.successMsg">
+    <div class="alert alert-success">{{ resend.successMsg }}</div>
+</div>
+<!-- Custom Success Message -->
+
+<br>
+
+<!-- Custom Error Message -->
+<div class="row show-hide-message" ng-show="resend.errorMsg">
+    <div class="alert alert-danger">{{ resend.errorMsg }}</div>
+</div>
+<!-- Custom Error Message -->

@@ -1,0 +1,114 @@
+<!-- Heading -->
+<div class="row text-center">
+    <div class="container">
+        <h2 class="section-heading">Search Engine</h2>
+        <h3 class="section-subheading text-muted">This page allows you to perform an advanced search of users in the database.</h3>
+    </div>
+</div>
+<!-- Heading -->
+
+<br>
+
+<!-- Loading Icon (Bootstrap) -->
+<div class="jumbotron text-center" ng-show="management.loading">
+    <span class="glyphicon glyphicon-repeat spinner"></span>
+    <p>Loading....</p>
+</div>
+<!-- Loading Icon (Bootstrap) -->
+
+<br>
+
+<!-- Username Search Box -->
+<div class="navbar-form">
+    <div class="form-group">
+        <input type="text" class="form-control" name="searchByUsername" placeholder="search by..." ng-model="searchByUsername">
+    </div>
+    <button type="button" class="btn btn-default">Username</button>
+</div>
+
+<!-- E-mail Search Box -->
+<div class="navbar-form">
+    <div class="form-group">
+        <input type="text" class="form-control" name="searchByEmail" placeholder="search by..." ng-model="searchByEmail">
+    </div>
+    <button type="button" class="btn btn-default">E-mail</button>
+</div>
+
+<!-- Name Search Box -->
+<div class="navbar-form">
+    <div class="form-group">
+        <input type="text" class="form-control" name="searchByName" placeholder="search by..." ng-model="searchByName">
+    </div>
+    <button type="button" class="btn btn-default">Name</button>
+</div>
+
+<!-- Search Button -->
+<div class="navbar-form">
+    <button type="button" ng-click="management.advancedSearch(searchByUsername, searchByEmail, searchByName);" class="btn btn-default">Search</button>
+    <br>
+    <br>
+    <!-- Sort Order Dropdown Menu -->
+    <div class="btn-group">
+        <button type="button" class="btn btn-danger">Sort by</button>
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu">
+            <!-- First Dropdown Option: Username -->
+            <li><a ng-click="management.sortOrder('username');" href="#">Username</a></li>
+            <!-- Second Dropdown Option: E-mail -->
+            <li><a ng-click="management.sortOrder('email');" href="#">E-mail</a></li>
+            <!-- Third Dropdown Option: Name -->
+            <li><a ng-click="management.sortOrder('name');" href="#">Name</a></li>
+        </ul>
+    </div>
+</div>
+
+<br>
+
+<!-- Search Results -->
+<div ng-show="management.searchLimit === undefined">
+    <p><strong>Results: </strong>{{ (management.users | filter: advancedSearchFilter | limitTo: management.searchLimit).length }}</p>
+</div>
+
+<!-- Sort Order Notification -->
+<div ng-show="management.sort">
+    <p><strong>Sort by: </strong>{{ management.sort }}</p>
+</div>
+
+<br>
+
+<!-- User Management Table -->
+<div class="panel panel-primary">
+    <!-- Heading -->
+    <div class="panel-heading">
+        <strong>User Management</strong>
+    </div>
+    <!-- Start: Table -->
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Email</th>
+        </tr>
+        <tr ng-repeat="person in management.users | filter: advancedSearchFilter | limitTo: management.searchLimit | orderBy: management.sort">
+            <td>{{ person.name }}</td>
+            <td>{{ person.username }}</td>
+            <td>{{ person.email }}</td>
+            <td>
+                <!-- Edit Button -->
+                <a href="/edit/{{ person._id }}">
+                    <button type="button" ng-show="management.editAccess" class="btn btn-primary">Edit</button>
+                </a>
+                <!-- Delete Button -->
+                <button type="button" ng-click="management.deleteUser(person.username);" ng-show="management.deleteAccess" class="btn btn-danger">Delete</button>
+            </td>
+        </tr>
+        <!-- End: Table -->
+    </table>
+</div>
+<!-- User Management Table -->
+
+<br>
+<br>

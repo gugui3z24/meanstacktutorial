@@ -1,0 +1,83 @@
+<!-- Heading -->
+<div class="row text-center">
+    <div class="container">
+        <h2 class="section-heading">User Login</h2>
+        <h3 class="section-subheading text-muted">Please enter your login information.</h3>
+    </div>
+</div>
+<!-- Heading -->
+
+<!-- Main Section -->
+<section id="contact">
+    <!-- Start of Container -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <form name="sentMessage" id="contactForm" ng-submit="main.doLogin(loginData);" novalidate>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Username Input -->
+                            <div class="form-group">
+                                <label>Username:</label>
+                                <input ng-disabled="main.disabled || facebook.disabled || twitter.disabled || google.disabled" class="form-control" type="text" name="username" placeholder="username *" ng-model="main.loginData.username" autocomplete="off">
+                            </div>
+                            <!-- Password Input -->
+                            <div class="form-group">
+                                <label>Password:</label>
+                                <input ng-disabled="main.disabled || facebook.disabled || twitter.disabled || google.disabled" class="form-control" type="password" name="password" placeholder="password *" ng-model="main.loginData.password">
+                            </div>
+                        </div>
+                        <!-- Side Textarea Box for Sample user -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <textarea class="form-control" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message." style="resize: none;">
+                                    Sample User: &#10; Username: demo &#10; Password: PAssword123!@#
+                                </textarea>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12 text-left">
+                            <div id="success"></div>
+                            <!-- Login Button -->
+                            <button type="submit" class="btn btn-xl">Login</button>
+                            <!-- Facebook Button -->
+                            <a href="#" ng-disabled="main.disabled || facebook.disabled || twitter.disabled || google.disabled" ng-click="main.facebook();">
+                                <img class="social-icons" src="assets/images/facebook.svg">
+                            </a>
+                            <!-- Twitter Button -->
+                            <a href="#" ng-disabled="main.disabled || facebook.disabled || twitter.disabled || google.disabled" ng-click="main.twitter();">
+                                <img class="social-icons" src="assets/images/twitter.svg">
+                            </a>
+                            <!-- Google Plus Button -->
+                            <a href="#" ng-disabled="main.disabled || facebook.disabled || twitter.disabled || google.disabled" ng-click="main.google();">
+                                <img class="social-icons" src="assets/images/google-plus.svg">
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <br>
+
+        <!-- Loading Icon (Bootstrap) -->
+        <div class="jumbotron text-center" ng-show="main.loading">
+            <span class="glyphicon glyphicon-repeat spinner"></span>
+            <p>Loading....</p>
+        </div>
+        <!-- Loading Icon (Bootstrap) -->
+
+        <!-- Custom Messages -->
+        <div class="row show-hide-message" ng-show="main.successMsg || main.errorMsg || facebook.errorMsg || twitter.errorMsg || google.errorMsg">
+            <div ng-class="alert">{{ main.successMsg || main.errorMsg || facebook.errorMsg || twitter.errorMsg || google.errorMsg }}</div>&nbsp
+            <a ng-show="main.expired || facebook.expired || google.expired || twitter.expired" href="/resend">
+                <!-- Button to Resend an Activation Link -->
+                <button type="button" class="btn btn-success">Resend Activation Link</button>
+            </a>
+        </div>
+        <!-- Custom Messages -->
+
+    </div>
+    <!-- End of Container -->
+</section>
+<!-- Main Section /-->
