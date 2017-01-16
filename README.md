@@ -60,6 +60,31 @@ passport.use(new GoogleStrategy({
     }
 ```
 
+- You must enter your own sendgrid e-mail information (found in api.js file):
+
+```
+var options = {
+    auth: {
+        api_user: '', // Enter yourSendgrid username
+        api_key: '' // Enter your Sendgrid password
+    }
+};
+var client = nodemailer.createTransport(sgTransport(options));
+```
+
+- You must also update all e-mail callbacks (links that users click for e-mail activation/password reset, etc.) found in the api.js file:
+
+```
+var email = {
+    from: 'MEAN Stack Staff, staff@localhost.com',
+    to: user.email,
+    subject: 'Reset Password Request',
+    text: 'Hello ' + user.name + ', You recently request a password reset link. Please click on the link below to reset your password:<br><br><a href="https://immense-dusk-71112.herokuapp.com/reset/' + user.resettoken,
+    html: 'Hello<strong> ' + user.name + '</strong>,<br><br>You recently request a password reset link. Please click on the link below to reset your password:<br><br><a href="https://immense-dusk-71112.herokuapp.com/reset/' + user.resettoken + '">https://immense-dusk-71112.herokuapp.com/reset/</a>'
+};
+
+```
+
 - Installation is complete. Navigate to folder where server.js file is located and enter the following into command prompt:
 
 ```

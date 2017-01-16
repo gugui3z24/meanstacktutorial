@@ -10,7 +10,7 @@ module.exports = function(router) {
     // Enter your info here, as my account would have likely expired
     var options = {
         auth: {
-            api_user: 'dbrian332', // Sendgrid username
+            api_user: 'meanstackbrock', // Sendgrid username
             api_key: 'PAssword123!@#' // Sendgrid password
         }
     };
@@ -251,7 +251,11 @@ module.exports = function(router) {
 
                     // Function to send e-mail to user
                     client.sendMail(email, function(err, info) {
-                        if (err) console.log(err); // If error in sending e-mail, log to console/terminal
+                        if (err) {
+                            console.log(err); // If error in sending e-mail, log to console/terminal
+                        } else {
+                            console.log(info); // Log confirmation to console
+                        }
                     });
                     res.json({ success: true, message: 'Username has been sent to e-mail! ' }); // Return success message once e-mail has been sent
                 }
@@ -284,7 +288,12 @@ module.exports = function(router) {
                         };
                         // Function to send e-mail to the user
                         client.sendMail(email, function(err, info) {
-                            if (err) console.log(err); // If error with sending e-mail, log to console/terminal
+                            if (err) {
+                                console.log(err); // If error with sending e-mail, log to console/terminal
+                            } else {
+                                console.log(info); // Log success message to console
+                                console.log('sent to: ' + user.email); // Log e-mail 
+                            }
                         });
                         res.json({ success: true, message: 'Please check your e-mail for password reset link' }); // Return success message
                     }

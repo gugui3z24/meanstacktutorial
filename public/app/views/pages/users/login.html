@@ -37,6 +37,15 @@
                         </div>
                         <div class="clearfix"></div>
                         <div class="col-lg-12 text-left">
+                            <div>
+                                <a href="/resetpassword">
+                                    <button ng-disabled="main.disabled || facebook.disabled || twitter.disabled || google.disabled" type="button" class="btn btn-danger">Forgot Password</button>
+                                </a>
+                                <a href="/resetusername">
+                                    <button ng-disabled="main.disabled || facebook.disabled || twitter.disabled || google.disabled" type="button" class="btn btn-info">Forgot Username</button>
+                                </a>
+                            </div>
+                            <br>
                             <div id="success"></div>
                             <!-- Login Button -->
                             <button type="submit" class="btn btn-xl">Login</button>

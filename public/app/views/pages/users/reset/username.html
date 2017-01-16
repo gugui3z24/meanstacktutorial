@@ -1,37 +1,50 @@
-<!-- Header -->
-<div class="page-header">
-    <h1>Forgot Username</h1>
+<!-- Heading -->
+<div class="row text-center">
+    <div class="container">
+        <h2 class="section-heading">Forgot Username</h2>
+        <h3 class="section-subheading text-muted">This page allows you to request your username be sent to your inbox.</h3>
+    </div>
 </div>
-<!-- Header -->
+<!-- Heading -->
 
-<!-- Start Form -->
-<form name="userForm" ng-submit="username.sendUsername(userData, userForm.$valid);" novalidate>
-    <!-- E-mail Input -->
-    <label>E-mail:</label>
-    <input ng-disabled="username.disabled || facebook.disabled || twitter.disabled || google.disabled" class="form-control" type="text" name="email" placeholder="please enter username" ng-model="username.userData.email" required>
-    <br>
-    <!-- Submit Button -->
-    <button ng-disabled="username.disabled || facebook.disabled || twitter.disabled || google.disabled" class="btn btn-primary" type="submit">Submit</button>&nbsp
-</form>
-<!-- End Form -->
+<!-- Main Section -->
+<section id="contact">
+    <!-- Start of Container -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <form name="userForm" id="contactForm" ng-submit="username.sendUsername(userData, userForm.$valid);" novalidate>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- E-mail Input -->
+                            <div class="form-group">
+                                <label>Email:</label>
+                                <input ng-disabled="username.disabled" class="form-control" type="text" name="email" placeholder="email *" ng-model="username.userData.email" required>
+                            </div>
+                            <!-- Submit Button -->
+                            <button ng-disabled="username.disabled" type="submit" class="btn btn-xl">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-<br>
+        <br>
 
-<!-- Loading Icon (Bootstrap) -->
-<div class="jumbotron text-center" ng-show="username.loading">
-    <span class="glyphicon glyphicon-repeat spinner"></span>
-    <p>Loading....</p>
-</div>
-<!-- Loading Icon (Bootstrap) -->
+        <!-- Loading Icon (Bootstrap) -->
+        <div class="jumbotron text-center" ng-show="username.loading">
+            <span class="glyphicon glyphicon-repeat spinner"></span>
+            <p>Loading....</p>
+        </div>
+        <!-- Loading Icon (Bootstrap) -->
 
-<br>
+        <!-- Custom Messages -->
+        <div class="row show-hide-message" ng-show="username.successMsg || username.errorMsg">
+            <div ng-class="alert">{{ username.successMsg || username.errorMsg }}</div>
+        </div>
+        <!-- Custom Messages -->
 
-<!-- Custom Success Message -->
-<div class="row show-hide-message" ng-show="username.successMsg">
-    <div class="alert alert-success">{{ username.successMsg }}</div>
-</div>
-
-<!-- Custom Error Message -->
-<div class="row show-hide-message" ng-show="username.errorMsg">
-    <div class="alert alert-danger">{{ username.errorMsg }}</div>
-</div>
+    </div>
+    <!-- End of Container -->
+</section>
+<!-- Main Section /-->
