@@ -4,7 +4,19 @@ angular.module('mainController', ['authServices', 'userServices'])
 .controller('mainCtrl', function(Auth, $timeout, $location, $rootScope, $window, $interval, User, AuthToken, $scope) {
     var app = this;
     app.loadme = false; // Hide main HTML until data is obtained in AngularJS
-    if ($window.location.pathname === '/') app.home = true;
+    if ($window.location.pathname === '/') app.home = true; // Check if user is on home page to show home page div
+
+    // Check if user's session has expired upon opening page for the first time
+    if (Auth.isLoggedIn()) {
+        // Check if a the token expired
+        Auth.getUser().then(function(data) {
+            // Check if the returned user is undefined (expired)
+            if (data.data.username === undefined) {
+                Auth.logout(); // Log the user out
+                app.isLoggedIn = false; // Set session to false
+            }
+        });
+    }
 
     // Function to run an interval that checks if the user's token has expired
     app.checkSession = function() {
@@ -99,11 +111,12 @@ angular.module('mainController', ['authServices', 'userServices'])
         $("#myModal").modal('hide'); // Hide modal once criteria met
     };
 
+    // Check if user is on the home page
     $rootScope.$on('$routeChangeSuccess', function() {
         if ($window.location.pathname === '/') {
-            app.home = true;
+            app.home = true; // Set home page div
         } else {
-            app.home = false;
+            app.home = false; // Clear home page div
         }
     });
 
@@ -113,21 +126,28 @@ angular.module('mainController', ['authServices', 'userServices'])
 
         // Check if user is logged in
         if (Auth.isLoggedIn()) {
-            app.isLoggedIn = true; // Variable to activate ng-show on index
-
             // Custom function to retrieve user data
             Auth.getUser().then(function(data) {
-                app.username = data.data.username; // Get the user name for use in index
-                app.useremail = data.data.email; // Get the user e-mail for us ein index
-                User.getPermission().then(function(data) {
-                    if (data.data.permission === 'admin' || data.data.permission === 'moderator') {
-                        app.authorized = true; // Set user's current permission to allow management
-                        app.loadme = true; // Show main HTML now that data is obtained in AngularJS
-                    } else {
-                        app.authorized = false;
-                        app.loadme = true; // Show main HTML now that data is obtained in AngularJS
-                    }
-                });
+                if (data.data.username === undefined) {
+                    app.isLoggedIn = false; // Variable to deactivate ng-show on index
+                    Auth.logout();
+                    app.isLoggedIn = false;
+                    $location.path('/');
+                } else {
+                    app.isLoggedIn = true; // Variable to activate ng-show on index
+                    app.username = data.data.username; // Get the user name for use in index
+                    checkLoginStatus = data.data.username;
+                    app.useremail = data.data.email; // Get the user e-mail for us ein index
+                    User.getPermission().then(function(data) {
+                        if (data.data.permission === 'admin' || data.data.permission === 'moderator') {
+                            app.authorized = true; // Set user's current permission to allow management
+                            app.loadme = true; // Show main HTML now that data is obtained in AngularJS
+                        } else {
+                            app.authorized = false;
+                            app.loadme = true; // Show main HTML now that data is obtained in AngularJS
+                        }
+                    });
+                }
             });
         } else {
             app.isLoggedIn = false; // User is not logged in, set variable to falses
@@ -164,14 +184,14 @@ angular.module('mainController', ['authServices', 'userServices'])
         app.errorMsg = false; // Clear errorMsg whenever user attempts a login
         app.expired = false; // Clear expired whenever user attempts a login 
         app.disabled = true; // Disable form on submission
-        $scope.alert = 'default';
+        $scope.alert = 'default'; // Set ng class
 
         // Function that performs login
         Auth.login(app.loginData).then(function(data) {
             // Check if login was successful 
             if (data.data.success) {
                 app.loading = false; // Stop bootstrap loading icon
-                $scope.alert = 'alert alert-success';
+                $scope.alert = 'alert alert-success'; // Set ng class
                 app.successMsg = data.data.message + '...Redirecting'; // Create Success Message then redirect
                 // Redirect to home page after two milliseconds (2 seconds)
                 $timeout(function() {
@@ -186,12 +206,12 @@ angular.module('mainController', ['authServices', 'userServices'])
                 if (data.data.expired) {
                     app.expired = true; // If expired, set variable to enable "Resend Link" on login page
                     app.loading = false; // Stop bootstrap loading icon
-                    $scope.alert = 'alert alert-danger';
+                    $scope.alert = 'alert alert-danger'; // Set ng class
                     app.errorMsg = data.data.message; // Return error message to login page
                 } else {
                     app.loading = false; // Stop bootstrap loading icon
                     app.disabled = false; // Enable form
-                    $scope.alert = 'alert alert-danger';
+                    $scope.alert = 'alert alert-danger'; // Set ng class
                     app.errorMsg = data.data.message; // Return error message to login page
                 }
             }

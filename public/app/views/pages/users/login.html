@@ -48,7 +48,7 @@
                             <br>
                             <div id="success"></div>
                             <!-- Login Button -->
-                            <button type="submit" class="btn btn-xl">Login</button>
+                            <button type="submit" ng-disabled="main.disabled || facebook.disabled || twitter.disabled || google.disabled" class="btn btn-xl">Login</button>
                             <!-- Facebook Button -->
                             <a href="#" ng-disabled="main.disabled || facebook.disabled || twitter.disabled || google.disabled" ng-click="main.facebook();">
                                 <img class="social-icons" src="assets/images/facebook.svg">

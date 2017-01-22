@@ -128,6 +128,7 @@ angular.module('userControllers', ['userServices'])
 
     // Check if callback was successful 
     if ($window.location.pathname == '/facebookerror') {
+        $scope.alert = 'alert alert-danger'; // Set class for message
         app.errorMsg = 'Facebook e-mail not found in database.'; // If error, display custom message
     } else if ($window.location.pathname == '/facebook/inactive/error') {
         app.expired = true; // Variable to activate "Resend Link Button"
@@ -140,7 +141,7 @@ angular.module('userControllers', ['userServices'])
 })
 
 // Controller: twitterCtrl is used finalize facebook login  
-.controller('twitterCtrl', function($routeParams, Auth, $location, $window) {
+.controller('twitterCtrl', function($routeParams, Auth, $location, $window, $scope) {
 
     var app = this;
     app.errorMsg = false; // Clear errorMsg on page load
@@ -149,6 +150,7 @@ angular.module('userControllers', ['userServices'])
 
     // Check if callback was successful         
     if ($window.location.pathname == '/twittererror') {
+        $scope.alert = 'alert alert-danger'; // Set class for message
         app.errorMsg = 'Twitter e-mail not found in database.'; // If error, display custom message
     } else if ($window.location.pathname == '/twitter/inactive/error') {
         app.expired = true; // Variable to activate "Resend Link Button"
@@ -161,7 +163,7 @@ angular.module('userControllers', ['userServices'])
 })
 
 // Controller: googleCtrl is used finalize facebook login   
-.controller('googleCtrl', function($routeParams, Auth, $location, $window) {
+.controller('googleCtrl', function($routeParams, Auth, $location, $window, $scope) {
 
     var app = this;
     app.errorMsg = false; // Clear errorMsg on page load
@@ -170,6 +172,7 @@ angular.module('userControllers', ['userServices'])
 
     // Check if callback was successful         
     if ($window.location.pathname == '/googleerror') {
+        $scope.alert = 'alert alert-danger'; // Set class for message
         app.errorMsg = 'Google e-mail not found in database.'; // If error, display custom message
     } else if ($window.location.pathname == '/google/inactive/error') {
         app.expired = true; // Variable to activate "Resend Link Button"
