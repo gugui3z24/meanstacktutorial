@@ -27,33 +27,42 @@ angular.module('emailController', ['userServices'])
 })
 
 // Controller: resendCtrl is used to resend an activation link to the user's e-mail
-.controller('resendCtrl', function(User) {
+.controller('resendCtrl', function(User, $scope) {
 
     app = this;
 
     // Custom function that check's the user's credentials against the database
-    app.checkCredentials = function(loginData) {
-        app.disabled = true; // Disable the form when user submits to prevent multiple requests to server
-        app.errorMsg = false; // Clear errorMsg each time user submits
+    app.checkCredentials = function(loginData, valid) {
+        if (valid) {
+            app.disabled = true; // Disable the form when user submits to prevent multiple requests to server
+            app.errorMsg = false; // Clear errorMsg each time user submits
 
-        // Runs custom function that check's the user's credentials against the database
-        User.checkCredentials(app.loginData).then(function(data) {
-            // Check if credentials match
-            if (data.data.success) {
-                // Custom function that sends activation link
-                User.resendLink(app.loginData).then(function(data) {
-                    // Check if sending of link is successful
-                    if (data.data.success) {
-                        app.successMsg = data.data.message; // If successful, grab message from JSON object
-                    } else {
-                        app.errorMsg = data.data.message; // If not successful, grab message from JSON object
-                    }
-                });
-            } else {
-                app.disabled = false; // If error occurs, remove disable lock from form
-                app.errorMsg = data.data.message; // If credentials do not match, display error from JSON object
-            }
-        });
+            // Runs custom function that check's the user's credentials against the database
+            User.checkCredentials(app.loginData).then(function(data) {
+                // Check if credentials match
+                if (data.data.success) {
+                    // Custom function that sends activation link
+                    User.resendLink(app.loginData).then(function(data) {
+                        // Check if sending of link is successful
+                        if (data.data.success) {
+                            $scope.alert = 'alert alert-success'; // Set error message ng-class
+                            app.successMsg = data.data.message; // If successful, grab message from JSON object
+                        } else {
+                            $scope.alert = 'alert alert-danger'; // Set error message ng-class
+                            app.errorMsg = data.data.message; // If not successful, grab message from JSON object
+                        }
+                    });
+                } else {
+                    app.disabled = false; // If error occurs, remove disable lock from form
+                    $scope.alert = 'alert alert-danger'; // Set error message ng-class
+                    app.errorMsg = data.data.message; // If credentials do not match, display error from JSON object
+                }
+            });
+        } else {
+            $scope.alert = 'alert alert-danger'; // Set error message ng-class
+            app.errorMsg = 'Please ensure form is filled out properly'; // Set form error message
+        }
+
     };
 })
 
