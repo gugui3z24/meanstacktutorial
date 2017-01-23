@@ -6,15 +6,23 @@ var sgTransport = require('nodemailer-sendgrid-transport'); // Import Nodemailer
 
 module.exports = function(router) {
 
-    // Start Sendgrid Configuration Settings    
-    // Enter your info here, as my account would have likely expired
-    var options = {
+    // Start Sendgrid Configuration Settings (Use only if using sendgrid)
+    // var options = {
+    //     auth: {
+    //         api_user: 'dbrian332', // Sendgrid username
+    //         api_key: 'PAssword123!@#' // Sendgrid password
+    //     }
+    // };
+
+    // Nodemailer options (use with g-mail or SMTP)
+    var client = nodemailer.createTransport({
+        service: 'Gmail',
         auth: {
-            api_user: 'meanstackbrock', // Sendgrid username
-            api_key: 'PAssword123!@#' // Sendgrid password
+            user: 'kane123999381@gmail.com', // Your email address
+            pass: 'PAssword123!@#' // Your password
         }
-    };
-    var client = nodemailer.createTransport(sgTransport(options));
+    });
+    // var client = nodemailer.createTransport(sgTransport(options)); // Use if using sendgrid configuration
     // End Sendgrid Configuration Settings  
 
     // Route to register new users  

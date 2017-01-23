@@ -14,6 +14,8 @@ angular.module('mainController', ['authServices', 'userServices'])
             if (data.data.username === undefined) {
                 Auth.logout(); // Log the user out
                 app.isLoggedIn = false; // Set session to false
+                $location.path('/'); // Redirect to home page
+                app.loadme = true; // Allow loading of page
             }
         });
     }

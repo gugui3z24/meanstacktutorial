@@ -21,12 +21,13 @@ var nameValidator = [
 // User E-mail Validator
 var emailValidator = [
     validate({
-        validator: 'isEmail',
-        message: 'Is not a valid e-mail.'
+        validator: 'matches',
+        arguments: /^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/,
+        message: 'Name must be at least 3 characters, max 40, no special characters or numbers, must have space in between name.'
     }),
     validate({
         validator: 'isLength',
-        arguments: [3, 25],
+        arguments: [3, 40],
         message: 'Email should be between {ARGS[0]} and {ARGS[1]} characters'
     })
 ];
