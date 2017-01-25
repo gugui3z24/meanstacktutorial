@@ -108,6 +108,14 @@ var app = angular.module('appRoutes', ['ngRoute'])
         authenticated: false
     })
 
+    // Route: Twitter Not Yet Activated Error
+    .when('/twitter/unconfirmed/error', {
+        templateUrl: 'app/views/pages/users/login.html',
+        controller: 'twitterCtrl',
+        controllerAs: 'twitter',
+        authenticated: false
+    })
+
     // Route: Activate Account Through E-mail
     .when('/activate/:token', {
         templateUrl: 'app/views/pages/users/activation/activate.html',

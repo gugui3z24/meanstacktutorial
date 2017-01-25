@@ -157,6 +157,9 @@ angular.module('userControllers', ['userServices'])
         app.expired = true; // Variable to activate "Resend Link Button"
         $scope.alert = 'alert alert-danger'; // Set class for message
         app.errorMsg = 'Account is not yet activated. Please check your e-mail for activation link.'; // If error, display custom message
+    } else if ($window.location.pathname == '/twitter/unconfirmed/error') {
+        $scope.alert = 'alert alert-danger'; // Set class for message
+        app.errorMsg = 'Your twitter account is either inactive or does not have an e-mail address attached to it.'; // If error, display custom message
     } else {
         Auth.socialMedia($routeParams.token); // If no error, set the token
         $location.path('/'); // Redirect to home page

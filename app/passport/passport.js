@@ -17,7 +17,12 @@ module.exports = function(app, passport) {
     passport.serializeUser(function(user, done) {
         // Check if the user has an active account
         if (user.active) {
-            token = jwt.sign({ username: user.username, email: user.email }, secret, { expiresIn: '24h' }); // If account active, give user token
+            // Check if user's social media account has an error
+            if (user.error) {
+                token = 'unconfirmed/error'; // Set url to different error page
+            } else {
+                token = jwt.sign({ username: user.username, email: user.email }, secret, { expiresIn: '24h' }); // If account active, give user token
+            }
         } else {
             token = 'inactive/error'; // If account not active, provide invalid token for use in redirecting later
         }
@@ -59,15 +64,25 @@ module.exports = function(app, passport) {
             userProfileURL: "https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true"
         },
         function(token, tokenSecret, profile, done) {
-            User.findOne({ email: profile.emails[0].value }).select('username active password email').exec(function(err, user) {
-                if (err) done(err);
-
-                if (user && user !== null) {
-                    done(null, user);
-                } else {
-                    done(err);
-                }
-            });
+            if (profile.emails) {
+                User.findOne({ email: profile.emails[0].value }).select('username active password email').exec(function(err, user) {
+                    if (err) {
+                        done(err);
+                    } else {
+                        if (user && user !== null) {
+                            done(null, user);
+                        } else {
+                            done(err);
+                        }
+                    }
+                });
+            } else {
+                user = {}; // Since no user object exists, create a temporary one in order to return an error
+                user.id = 'null'; // Temporary id
+                user.active = true; // Temporary status
+                user.error = true; // Ensure error is known to exist
+                done(null, user); // Serialize and catch error
+            }
         }
     ));
 
