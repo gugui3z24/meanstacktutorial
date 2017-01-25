@@ -17,14 +17,31 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <div ng-class="{ 'has-success':(regForm.name.$valid && !regForm.name.$pristine), 'has-error':(!regForm.name.$valid && !regForm.name.$pristine) || (!regForm.name.$valid && regForm.$submitted) }">
-                                    <!-- Name Input -->
-                                    <label>Name:</label>
-                                    <input ng-disabled="register.disabled" class="form-control" type="text" name="name" placeholder="Name *" ng-model="register.regData.name" ng-pattern="/^(([a-zA-Z]{3,20})+[ ]+([a-zA-Z]{3,20})+)+$/" ng-minlength="3" ng-maxlength="20" required>
-                                    <!-- Name Validation -->
-                                    <p class="help-block" ng-show="(!regForm.name.$pristine && regForm.name.$error.required) || (regForm.$submitted && regForm.name.$error.required)">This field is required</p>
-                                    <ul ng-show="(!regForm.name.$pristine && regForm.name.$error.pattern) || (!regForm.name.$pristine && regForm.name.$error.minlength) || (!regForm.name.$pristine && regForm.name.$error.maxlength)" class="help-block">
-                                        <li>Must have a space in between first and last name</li>
+                                <div ng-class="{ 'has-success':(regForm.firstName.$valid && !regForm.firstName.$pristine), 'has-error':(!regForm.firstName.$valid && !regForm.firstName.$pristine) || (!regForm.firstName.$valid && regForm.$submitted) }">
+                                    <!-- First Name Input -->
+                                    <label>First Name:</label>
+                                    <input ng-disabled="register.disabled" class="form-control" type="text" name="firstName" placeholder="First Name *" ng-model="register.regData.firstName" ng-pattern="/^[a-zA-Z]+$/" ng-minlength="3" ng-maxlength="20" required>
+                                    <!-- First Name Validation -->
+                                    <p class="help-block" ng-show="(!regForm.firstName.$pristine && regForm.firstName.$error.required) || (regForm.$submitted && regForm.firstName.$error.required)">This field is required</p>
+                                    <ul ng-show="(!regForm.firstName.$pristine && regForm.firstName.$error.pattern) || (!regForm.firstName.$pristine && regForm.firstName.$error.minlength) || (!regForm.firstName.$pristine && regForm.firstName.$error.maxlength)" class="help-block">
+                                        <li>Must have a space in between first and last firstName</li>
+                                        <li>Must not contain any special characters</li>
+                                        <li>Must not contain any numbers</li>
+                                        <li>Must be at least 3 characters but no more than 20</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div ng-class="{ 'has-success':(regForm.lastName.$valid && !regForm.lastName.$pristine), 'has-error':(!regForm.lastName.$valid && !regForm.lastName.$pristine) || (!regForm.lastName.$valid && regForm.$submitted) }">
+                                    <!-- Last Name Input -->
+                                    <label>Last Name:</label>
+                                    <input ng-disabled="register.disabled" class="form-control" type="text" name="lastName" placeholder="Last Name *" ng-model="register.regData.lastName" ng-pattern="/^[a-zA-Z]+$/" ng-minlength="3" ng-maxlength="20" required>
+                                    <!-- Last Name Validation -->
+                                    <p class="help-block" ng-show="(!regForm.lastName.$pristine && regForm.lastName.$error.required) || (regForm.$submitted && regForm.lastName.$error.required)">This field is required</p>
+                                    <ul ng-show="(!regForm.lastName.$pristine && regForm.lastName.$error.pattern) || (!regForm.lastName.$pristine && regForm.lastName.$error.minlength) || (!regForm.lastName.$pristine && regForm.lastName.$error.maxlength)" class="help-block">
+                                        <li>Must have a space in between first and last lastName</li>
                                         <li>Must not contain any special characters</li>
                                         <li>Must not contain any numbers</li>
                                         <li>Must be at least 3 characters but no more than 20</li>

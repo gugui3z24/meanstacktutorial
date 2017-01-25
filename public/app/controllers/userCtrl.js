@@ -13,6 +13,7 @@ angular.module('userControllers', ['userServices'])
 
         // If form is valid and passwords match, attempt to create user         
         if (valid && confirmed) {
+            app.regData.name = app.regData.firstName + " " + app.regData.lastName; // Combine first and last name before submitting to database
             // Runs custom function that registers the user in the database 
             User.create(app.regData).then(function(data) {
                 // Check if user was saved to database successfully
