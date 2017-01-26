@@ -16,10 +16,10 @@ module.exports = function(router) {
 
     // Nodemailer options (use with g-mail or SMTP)
     var client = nodemailer.createTransport({
-        service: 'Gmail',
+        service: 'Mailgun',
         auth: {
-            user: 'kane123999381@gmail.com', // Your email address
-            pass: 'PAssword123!@#' // Your password
+            user: 'postmaster@www.herokutestapp3z24.com', // Your email address
+            pass: 'bc151674162caffafce1eb36c00f345a' // Your password
         }
     });
     // var client = nodemailer.createTransport(sgTransport(options)); // Use if using sendgrid configuration
