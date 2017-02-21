@@ -20,7 +20,8 @@ module.exports = function(router) {
         auth: {
             user: 'cruiserweights@zoho.com', // Your email address
             pass: 'PAssword123!@#' // Your password
-        }
+        },
+        tls: { rejectUnauthorized: false }
     });
     // var client = nodemailer.createTransport(sgTransport(options)); // Use if using sendgrid configuration
     // End Sendgrid Configuration Settings  
